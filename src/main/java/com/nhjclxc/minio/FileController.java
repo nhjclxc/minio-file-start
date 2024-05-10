@@ -48,7 +48,7 @@
 //    @GetMapping("/downLoadFile")
 //    public void downLoadFile(String filePath, HttpServletResponse response) throws IOException {
 //        InputStream inputStream = minIoTemplate.downLoadFile(filePath);
-//        setResponse(response, MinIoTemplate.extractFileName(filePath));
+//        MinIoTemplate.setResponse(response, MinIoTemplate.extractFileName(filePath));
 ////        write(response, inputStream);
 //
 //        byte[] bytes = IOUtils.toByteArray(inputStream);

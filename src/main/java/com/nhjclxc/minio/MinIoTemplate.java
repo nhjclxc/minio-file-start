@@ -1,13 +1,17 @@
 package com.nhjclxc.minio;
 
 
+import com.google.common.net.HttpHeaders;
 import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.RemoveObjectArgs;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -164,4 +168,19 @@ public class MinIoTemplate {
 //        byte[] bytes = IOUtils.toByteArray(inputStream);
         return inputStream;
     }
+
+
+
+//    /**
+//     * 设置响应流
+//     */
+//    public static void setResponse(HttpServletResponse response, String fileName) throws IOException {
+//        response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+//        response.addHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION);
+//        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8.name()));
+//        response.setContentType("application/octet-stream; charset=UTF-8");
+////        MediaType.APPLICATION_OCTET_STREAM_VALUE
+////import org.springframework.http.HttpHeaders;
+////import org.springframework.http.MediaType;
+//    }
 }
