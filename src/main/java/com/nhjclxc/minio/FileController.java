@@ -78,14 +78,17 @@
 //    }
 //
 //
-//    /**
-//     * 设置响应流
-//     */
-//    public static void setResponse(HttpServletResponse response, String fileName) throws IOException {
-//        response.addHeader("Access-Control-Allow-Origin", "*");
-//        response.addHeader("Access-Control-Expose-Headers", "Content-Disposition");
-//        response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8.name()));
+///**
+// * 设置响应流
+// */
+//public static void setResponse(HttpServletResponse response, String fileName) throws IOException {
+//        response.reset();
+//        response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+//        response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "*");
+//        response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "*");
+//        response.addHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION);
+//        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8.name()));
 //        response.setContentType("application/octet-stream; charset=UTF-8");
-//    }
+//        }
 //
 //}
