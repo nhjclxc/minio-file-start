@@ -1,7 +1,9 @@
 package com.nhjclxc.controller;
 
 import com.nhjclxc.minio.MinIoTemplate;
+import com.nhjclxc.utils.ImageCompressUtils;
 import com.nhjclxc.utils.JsonResult;
+import lombok.Cleanup;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +42,25 @@ public class FileController {
             long end = System.currentTimeMillis();
             System.out.println("结束：" + end);
             System.out.println("耗时：" + (end - start));
+            return JsonResult.success(JsonResult.Type.SUCCESS.typeName(), filePath);
+        } catch (Exception e) {
+            return JsonResult.error(e.getMessage());
+        }
+    }
+
+
+
+//    @ApiOperation(value = "上传文件超过1M自带压缩")
+//    @ApiResponse(code = 200, message = "success")
+    @PostMapping("/uploadFileWithCompress")
+    public JsonResult<String> uploadFileWithCompress(MultipartFile file) {
+        try {
+            @Cleanup
+            InputStream is = file.getInputStream();
+            InputStream inputStream = ImageCompressUtils.compressByInputStream(is, 1024 * 1024);
+            String filePath = minIoTemplate.uploadFile(inputStream, file.getOriginalFilename(), null);
+            inputStream.close();
+            log.info("文件上传成功 {}", filePath);
             return JsonResult.success(JsonResult.Type.SUCCESS.typeName(), filePath);
         } catch (Exception e) {
             return JsonResult.error(e.getMessage());
